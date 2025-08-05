@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sports-product-api
+spec:
+  selector:
+    matchLabels:
+      app: products
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: products
+    spec:
+      containers:
+        - name: products
+          image: sujaydas/sportsapp-product
+          ports:
+            - containerPort: 3001

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Sports-App-Api-Gateway
+  name: sports-app-api-gateway
 spec:
   selector:
     matchLabels:

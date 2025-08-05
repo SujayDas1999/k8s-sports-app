@@ -7,7 +7,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/SujayDas1999/k8s-sports-app.gi
+    repoURL: https://github.com/SujayDas1999/k8s-sports-app.git
     targetRevision: HEAD
     path: dev
   destination:

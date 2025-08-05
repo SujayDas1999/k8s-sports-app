@@ -16,4 +16,4 @@ spec:
         - name: apigateway
           image: sujaydas/sportsapp-apigateway
           ports:
-            - containerPort: 3001
+            - containerPort: 3000

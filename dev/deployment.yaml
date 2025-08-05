@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: myapp
+  name: Sports-App-Api-Gateway
 spec:
   selector:
     matchLabels:
-      app: myapp
+      app: api-gateway
   replicas: 2
   template:
     metadata:
       labels:
-        app: myapp
+        app: api-gateway
     spec:
       containers:
         - name: apigateway

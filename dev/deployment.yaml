@@ -17,3 +17,6 @@ spec:
           image: sujaydas/sportsapp-apigateway
           ports:
             - containerPort: 3000
+          env:
+            - name: RUNNING_IN_CONTAINER
+              value: "true"

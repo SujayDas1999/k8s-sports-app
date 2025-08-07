@@ -1,26 +1,61 @@
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: myapp-argo-application
+#   namespace: argocd
+# spec:
+#   project: default
+
+#   source:
+#     repoURL: https://github.com/SujayDas1999/k8s-sports-app.git
+#     targetRevision: HEAD
+#     path: my-app
+#     helm:
+#       valueFiles:
+#         - apigateway/values.yaml
+#         - products/values.yaml
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: myapp
+
+#   syncPolicy:
+#     syncOptions:
+#       - CreateNamespace=true
+
+#     automated:
+#       selfHeal: true
+#       prune: true
+
+
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
-  name: myapp-argo-application
+  name: myapp-multi-appset
   namespace: argocd
 spec:
-  project: default
-
-  source:
-    repoURL: https://github.com/SujayDas1999/k8s-sports-app.git
-    targetRevision: HEAD
-    path: my-app
-    helm:
-      valueFiles:
-        - apps/apigateway/values.yaml
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: myapp
-
-  syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
-
-    automated:
-      selfHeal: true
-      prune: true
+  generators:
+    - git:
+        repoURL: 'https://github.com/SujayDas1999/k8s-sports-app.git'
+        revision: HEAD
+        directories:
+          - path: my-app/*   # This will match each subfolder like apigateway, products
+  template:
+    metadata:
+      name: '{{path.basename}}-application'   # Metadata.name will be the folder, e.g. apigateway-application
+      namespace: argocd                      # You can set a dynamic value if needed
+    spec:
+      project: default
+      source:
+        repoURL: 'https://github.com/SujayDas1999/k8s-sports-app.git'
+        targetRevision: HEAD
+        path: '{{path.path}}'
+        helm:
+          valueFiles:
+            - values.yaml                     # Each app expects values.yaml in its folder
+      destination:
+        server: 'https://kubernetes.default.svc'
+        namespace: '{{path.basename}}'        # Uses folder name as target namespace
+      syncPolicy:
+        automated:
+          selfHeal: true
+          prune: true

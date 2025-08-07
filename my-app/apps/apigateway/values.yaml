@@ -1,8 +1,11 @@
-appname: sports-app-api-gateway
-selectorname: api-gateway
-containername: api-gateway
-imagename: sujaydas/sportsapp-apigateway
-port: 3000
+app:
+  appname: sports-app-api-gateway
+  selectorname: api-gateway
+  replicas: 2
+  container:
+    containername: api-gateway
+    imagename: sujaydas/sportsapp-apigateway
+    port: 3000
 
 service:
   servicename: api-gateway-service

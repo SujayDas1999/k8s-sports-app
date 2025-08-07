@@ -1,9 +1,11 @@
-appname: sports-product-api
-selectorname: products
-container:
-  containername: products
-  imagename: sujaydas/sportsapp-product
-  port: 3001
+app:
+  appname: sports-product-api
+  selectorname: products
+  replicas: 2
+  container:
+    containername: products
+    imagename: sujaydas/sportsapp-product
+    port: 3001
 
 service:
   servicename: products-service

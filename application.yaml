@@ -86,7 +86,7 @@ spec:
         path: my-app
         helm:
           valueFiles:
-            - '{{valuesFile}}'
+            - 'apps/{{valuesFile}}'
       destination:
         server: 'https://kubernetes.default.svc'
         namespace: '{{name}}'

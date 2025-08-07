@@ -12,7 +12,7 @@ spec:
     path: my-app
     helm:
       valueFiles:
-        - apigateway/values.yaml
+        - apps/*/values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: myapp

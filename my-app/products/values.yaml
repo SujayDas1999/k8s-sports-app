@@ -5,3 +5,10 @@ container:
   imagename: sujaydas/sportsapp-product
   port: 3001
 
+service:
+  servicename: products-service
+  selectorname: products
+  port: 3001
+  protocol: TCP
+  targetPort: 3001
+

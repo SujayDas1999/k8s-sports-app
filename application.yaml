@@ -10,6 +10,10 @@ spec:
     repoURL: https://github.com/SujayDas1999/k8s-sports-app.git
     targetRevision: HEAD
     path: my-app
+    helm:
+      valueFiles:
+        - products/values.yaml
+        - apigateway/values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: myapp

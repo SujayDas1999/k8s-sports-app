@@ -27,6 +27,40 @@
 #       prune: true
 
 
+# apiVersion: argoproj.io/v1alpha1
+# kind: ApplicationSet
+# metadata:
+#   name: myapp-multi-appset
+#   namespace: argocd
+# spec:
+#   generators:
+#     - git:
+#         repoURL: 'https://github.com/SujayDas1999/k8s-sports-app.git'
+#         revision: HEAD
+#         directories:
+#           - path: my-app/*   
+#   template:
+#     metadata:
+#       name: '{{ path.basename }}-application'
+#       namespace: argocd                      
+#     spec:
+#       project: default
+#       source:
+#         repoURL: 'https://github.com/SujayDas1999/k8s-sports-app.git'
+#         targetRevision: HEAD
+#         path: '{{ path.path }}'
+#         helm:
+#           valueFiles:
+#             - values.yaml                     
+#       destination:
+#         server: 'https://kubernetes.default.svc'
+#         namespace: '{{ path.basename }}'        
+#       syncPolicy:
+#         automated:
+#           selfHeal: true
+#           prune: true
+
+
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -34,28 +68,31 @@ metadata:
   namespace: argocd
 spec:
   generators:
-    - git:
-        repoURL: 'https://github.com/SujayDas1999/k8s-sports-app.git'
-        revision: HEAD
-        directories:
-          - path: my-app/*   
+    - list:
+        elements:
+          - name: apigateway
+            valuesFile: apigateway/values.yaml
+          - name: products
+            valuesFile: products/values.yaml
   template:
     metadata:
-      name: '{{path.basename}}-application'
-      namespace: argocd                      
+      name: '{{name}}-application'
+      namespace: argocd
     spec:
       project: default
       source:
         repoURL: 'https://github.com/SujayDas1999/k8s-sports-app.git'
         targetRevision: HEAD
-        path: '{{path.path}}'
+        path: my-app
         helm:
           valueFiles:
-            - values.yaml                     
+            - '{{valuesFile}}'
       destination:
         server: 'https://kubernetes.default.svc'
-        namespace: '{{path.basename}}'        
+        namespace: '{{name}}'
       syncPolicy:
         automated:
           selfHeal: true
           prune: true
+        syncOptions:
+          - CreateNamespace=true

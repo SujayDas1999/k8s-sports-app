@@ -13,10 +13,10 @@ spec:
         app: {{ .Values.app.selectorname }}
     spec:
       containers:
-        - name: {{ .Values.app.containername }}
-          image: {{ .Values.app.imagename }}
+        - name: {{ .Values.app.container.containername }}
+          image: {{ .Values.app.container.imagename }}
           ports:
-            - containerPort: {{ .Values.app.port }}
+            - containerPort: {{ .Values.app.container.port }}
           env:
             - name: RUNNING_IN_CONTAINER
               value: "true"

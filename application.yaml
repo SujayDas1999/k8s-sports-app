@@ -1,34 +1,3 @@
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-#   name: myapp-argo-application
-#   namespace: argocd
-# spec:
-#   project: default
-
-#   source:
-#     repoURL: https://github.com/SujayDas1999/k8s-sports-app.git
-#     targetRevision: HEAD
-#     path: my-app
-#     helm:
-#       valueFiles:
-#         - apigateway/values.yaml
-#         - products/values.yaml
-#   destination:
-#     server: https://kubernetes.default.svc
-#     namespace: myapp
-
-#   syncPolicy:
-#     syncOptions:
-#       - CreateNamespace=true
-
-#     automated:
-#       selfHeal: true
-#       prune: true
-
-
-
-
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:

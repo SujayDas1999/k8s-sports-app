@@ -9,10 +9,8 @@ app:
 
 service:
   servicename: products-service
-  servicetype: NodePort
   selectorname: products
   port: 3001
   protocol: TCP
   targetPort: 3001
-  nodePort: 30001
 

@@ -1,4 +1,4 @@
-{{ - if .Values.service.service-name }}
+{{- if .Values.service.service-name }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -8,12 +8,12 @@ spec:
   type: {{ .Values.service.service-type }}
   {{- end }}
   selector:
-    app: {{ .Values.service.selector-name }} 
+    app: {{ .Values.service.selector-name }}
   ports:
-    - port: {{ .Values.service.port }} 
+    - port: {{ .Values.service.port }}
       protocol: {{ .Values.service.protocol }}
       targetPort: {{ .Values.service.targetPort }}
-      {{- if .Values.service.service-type eq NodePort }}
-      nodePort: {{ .Values.service.nodePort}} 
-      {{- end}}
+      {{- if eq .Values.service.service-type "NodePort" }}
+      nodePort: {{ .Values.service.nodePort }}
+      {{- end }}
 {{- end }}

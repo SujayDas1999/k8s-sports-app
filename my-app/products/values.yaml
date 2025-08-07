@@ -1,0 +1,7 @@
+appname: sports-product-api
+selectorname: products
+container:
+  containername: products
+  imagename: sujaydas/sportsapp-product
+  port: 3001
+

@@ -3,3 +3,13 @@ selectorname: api-gateway
 containername: api-gateway
 imagename: sujaydas/sportsapp-apigateway
 port: 3000
+
+service:
+  service-name: api-gateway-service
+  service-type: NodePort
+  selectorname: api-gateway
+  port: 3000
+  protocol: tcp
+  targetPort: 3000
+  nodePort: 30000
+

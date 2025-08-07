@@ -1,13 +1,19 @@
+{{ - if .Values.service.service-name }}
 apiVersion: v1
 kind: Service
 metadata:
-  name: api-gateway-service
+  name: {{ .Values.service.service-name }}
 spec:
-  type: NodePort
+  {{- if .Values.service.service-type }}
+  type: {{ .Values.service.service-type }}
+  {{- end }}
   selector:
-    app: api-gateway
+    app: {{ .Values.service.selector-name }} 
   ports:
-    - port: 3000
-      protocol: TCP
-      targetPort: 3000
-      nodePort: 30000
+    - port: {{ .Values.service.port }} 
+      protocol: {{ .Values.service.protocol }}
+      targetPort: {{ .Values.service.targetPort }}
+      {{- if .Values.service.service-type eq NodePort }}
+      nodePort: {{ .Values.service.nodePort}} 
+      {{- end}}
+{{- end }}

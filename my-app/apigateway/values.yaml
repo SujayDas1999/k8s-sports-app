@@ -9,7 +9,7 @@ service:
   servicetype: NodePort
   selectorname: api-gateway
   port: 3000
-  protocol: tcp
+  protocol: TCP
   targetPort: 3000
   nodePort: 30000
 

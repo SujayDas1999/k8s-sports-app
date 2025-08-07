@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sports-app-api-gateway
+  name: { { .Values.appname } }
 spec:
   selector:
     matchLabels:
-      app: api-gateway
+      app: { { .Values.selectorname } }
   replicas: 2
   template:
     metadata:
       labels:
-        app: api-gateway
+        app: { { .Values.selectorname } }
     spec:
       containers:
-        - name: apigateway
-          image: sujaydas/sportsapp-apigateway
+        - name: { { .Values.containername } }
+          image: { { .Values.imagename } }
           ports:
-            - containerPort: 3000
+            - containerPort: { { .Values.port } }
           env:
             - name: RUNNING_IN_CONTAINER
               value: "true"

@@ -9,10 +9,10 @@ spec:
   source:
     repoURL: https://github.com/SujayDas1999/k8s-sports-app.git
     targetRevision: HEAD
-    path: my-app
+    path: dev
   destination:
     server: https://kubernetes.default.svc
-    namespace: dev
+    namespace: myapp
 
   syncPolicy:
     syncOptions:

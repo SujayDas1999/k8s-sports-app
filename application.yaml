@@ -38,7 +38,7 @@ spec:
         repoURL: 'https://github.com/SujayDas1999/k8s-sports-app.git'
         revision: HEAD
         directories:
-          - path: my-app/*   # This will match each subfolder like apigateway, products
+          - path: my-app/apps/*   # This will match each subfolder like apigateway, products
   template:
     metadata:
       name: '{{path.basename}}-application'   # Metadata.name will be the folder, e.g. apigateway-application
